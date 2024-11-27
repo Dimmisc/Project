@@ -1,0 +1,22 @@
+ /*Calasses div[*/
+.Top{
+
+}
+.LeftSide {
+    float:left; 
+    width:24%; 
+    margin-left:1%
+}
+.RightSide {
+    float:right; 
+    width:74%;
+}
+/*Calasses ul*/
+ul {
+    list-style-type: none;
+}
+.li1 {
+    background: orange;
+    font-size:10pt;
+    font-family:Arial;
+}
