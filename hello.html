@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Посещение учеников</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    </head>
+    <body>
+        <div class="left_menu">
+            <ul>
+                    <a href="Sheets/page1.html"><div class="pd"><div class="bor1"><li class="li1">График посещаемости учеников дня недели</li></div></div></a>
+                    <a href="Sheets/page2.html"><div class="pd"><div class="bor1"><li class="li1">График посещения учеников</li></div></div></a>
+                    <a href="Sheets/page3.html"><div class="pd"><div class="bor1"><li class="li1">График посещения по классам</li></div></div></a>
+                    <a href="Sheets/page4.html"><div class="pd"><div class="bor1"><li class="li1">Вход в систему</li></div></div></a>
+            </ul>
+        </div>
+        <div class="right">
+        {{ name }}
+        </div>
+    </body>
+</html>
