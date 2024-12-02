@@ -1,0 +1,53 @@
+.left_menu {
+    float:left;
+    width:15%;
+    padding-right: 1%;
+    height:unset;
+    border-right: 0.2vw solid lawngreen;
+}
+.left_menu ul {
+    margin-top:0.5vw;
+    padding-left: 0.5vw;
+    list-style-type: none;
+}
+.right {
+    padding-top:2%;
+    text-align: center;
+}
+.li1 {
+    text-align: center;                    
+    font-family:Arial;
+}
+.mainmenu1 {
+    text-decoration:none;
+}
+.pd {
+    padding-top: 0.5vw;
+    padding-bottom: 0.5vw;
+}
+.clamped {
+    padding-top: 0.5vw;
+    padding-bottom: 0.5vw;
+}
+.clamped div {
+    background-color: blue;
+    color: cyan;
+}
+.bor1 {
+    padding-left: 0.25vw;
+    padding-right: 0.25vw;
+    border: 0.25vw solid lightblue;
+    border-radius: 0.5vw;
+}
+.pd div:hover {
+    color: cyan;
+    background-color: rgb(197, 171, 52);
+}
+a {
+    font-size: 1vw;
+    text-decoration: none;
+    color: red;
+}
+body {
+    margin: 0%;
+}
