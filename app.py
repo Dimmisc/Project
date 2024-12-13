@@ -34,3 +34,45 @@ for i in c:
 
 connection.commit()
 connection.close()
+
+import plotly.graph_objects as go
+import numpy as np
+
+# Create figure
+xb = ["f", 'fas', 'fw', 'wev', 'qfsa', 'afsaw', 'rtyrtg', 'trshrh', 'trhdht', 'dsht', 'sthrstssz']
+yb = [1, 4, 5, 4, 4, 3, 2, 1, 2, 4, 5]
+fig = go.Figure()
+
+# Add traces, one for each slider step
+for step in range(2):
+    print(step)
+    fig.add_trace(
+        go.Bar(
+            visible=False,
+            x=xb[step:step+5],
+            y=yb[step:step+5]))
+
+# Make 10th trace visible
+fig.data[0].visible = True
+
+# Create and add slider
+steps = []
+for i in range(len(fig.data)):
+    step = dict(
+        method="update",
+        args=[{"visible": [False] * len(fig.data)},
+              {"title": "Slider switched to step: " + str(i)}],  # layout attribute
+    )
+    step["args"][0]["visible"][i] = True  # Toggle i'th trace to "visible"
+    steps.append(step)
+
+sliders = [dict(
+    active=0,
+    currentvalue={"prefix": "Frequency: "},
+    pad={"t": 11},
+    steps=steps
+)]
+
+fig.update_layout(sliders=sliders)
+
+fig.show()
