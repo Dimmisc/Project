@@ -9,10 +9,12 @@ from database.site_data import Users
 
 
 
-app = Flask(__name__)   
+app = Flask(__name__)
+login_manager = LoginManager()
+login_manager.init_app(app)
 
 
-@LoginManager.user_loader(self=app, callback=None)
+@login_manager.user_loader
 def load_user(user_id):
     db_sess = db_session.create_session()
     return db_sess.get(Users, user_id)
@@ -38,6 +40,12 @@ def authorisation():
         return redirect(url_for(main_page))
     return render_template("login.html", form=form)
 
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect("/")
 
 if __name__ == "__main__":  
     db_session.global_init("database/db/blogs.db")
