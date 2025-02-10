@@ -8,7 +8,7 @@ from forms.site import ExselFile
 from database.site_data import Users
 
 
-
+DB_href = "database/db/blogs.db"
 app = Flask(__name__)
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -48,5 +48,5 @@ def logout():
     return redirect("/")
 
 if __name__ == "__main__":  
-    db_session.global_init("database/db/blogs.db")
+    db_session.global_init(DB_href)
     app.run(debug=True)
