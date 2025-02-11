@@ -2,15 +2,38 @@ body {
     padding: 0%;
     margin: 0%;
 }
-.ic {
-    font-size: 20px;
+.flx {
+    display: flex;
+}
+.grd {
+    display: grid;
+    grid-template-columns: 100% 0%;
+    grid-template-rows: auto;
+}
+.pt {
+    padding: 0%;
+    margin-top: 5%;
+    margin-left: 0%;
+    margin-bottom: 0%;
+    margin-right: 0%;
+}
+.lf {
+    float: left;    
+}
+.inl {
+    display: inline;
 }
 .icon {
-    width:60px;
-    height: 60px;
+    width: 90%;
+    height: 90%;
+    border: 0.3vh solid green;
+    border-radius: 20%;
 }
 .desc{
+    margin: 0%;
+    padding: 0%;
     visibility: hidden;
+    font-size: 2vb;
 }
 .view {
     display: flex;
@@ -29,18 +52,39 @@ body {
 }
 .panel:hover ~ .content{
     float: right;
+    display: flex;
     width: 91%;
 }
+.panel:hover .icon{
+    border: 0.3vh solid green;
+    border-radius: 20%;
+}
+.panel:hover .grd{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-auto-rows: minmax(0, auto);
+}
 .panel:hover .desc{
+    margin: 0%;
+    padding: 0%;
     visibility: visible;
+    font-size: 2vb;
+}
+.panel:hover .pt{
+    padding: 1%;
+    margin-top: 2.5%;
+    margin-left: 0%;
+    margin-bottom: 0%;
+    margin-right: 0%;
 }
 .content {
     float: right;
     width: 96%;
+    display: flex;
 
 }
 .border {
-    border-right: 3px solid gray;
-    border-top: 3px solid gray;
+    border-right: 0.5vh solid gray;
+    border-top: 0.5vh solid gray;
     height: 200vh;
 }
