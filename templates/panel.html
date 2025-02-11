@@ -3,15 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/panel.css') }}">
     <title>Document</title>
-</head>
+</head> 
 <body>
     <div class="panel">
         <div class="border">
-            <p><a class="ic" href="">kjf</a><a href="" class="desc">Some new</a></p>
+                <p><img src="/static/icons/1.png" class="icon"></img><a href="" class="desc">Стр1</a></p>
+                <p><img src="/static/icons/21.png" class="icon"></img><a href="" class="desc">Стр2</a></p>
+                <p><img src="/static/icons/3.png" class="icon"></img><a href="" class="desc">Стр3</a></p>
         </div>
     </div>
-    <div class="content">{% block content %}{% endblock %}</div>
+    <div class="content">
+        {% block content %} {% endblock %}
+    </div>
 </body>
 </html>

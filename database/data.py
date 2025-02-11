@@ -5,7 +5,6 @@ from .db_session import DataBase
 
 class Visitings(DataBase):
     __tablename__ = 'visitings'
-
     id = sa.Column(sa.Integer, primary_key=True, autoincrement=True)
     date = sa.Column(sa.String)
     surname = sa.Column(sa.String)
@@ -15,4 +14,3 @@ class Visitings(DataBase):
     lastExit = sa.Column(sa.String)
     attended = sa.Column(sa.Boolean)
     status = sa.Column(sa.String)
-
