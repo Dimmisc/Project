@@ -1,4 +1,5 @@
 import sqlalchemy as sa
+from sqlalchemy import orm
 
 from .db_session import DataBase
 
@@ -15,4 +16,4 @@ class Visitings(DataBase):
     attended = sa.Column(sa.Boolean)
     status = sa.Column(sa.String)
 
-
+    student = orm.relationship("Students")

@@ -17,14 +17,9 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
-@app.route("/") 
+@app.route("/", methods=["GET", "POST"]) 
 def main_page():
     return render_template("main.html")
-
-
-@app.route("/locate_student", methods=["GET", "POST"])
-def locate_student():
-    return render_template("locate_student.html")
 
 
 @app.route("/provide_students_visiting")
@@ -34,12 +29,12 @@ def prostuvis():
 
 @app.route("/provide_grade_visiting")
 def prostuvis():
-    return render_template("provide_students_visiting.html")
+    return render_template("provide_grade_visiting.html")
 
 
-@app.route("/provide_student_visiting")
+@app.route("/provide_student_visiting", methods=["GET", "POST"])
 def prostuvis():
-    return render_template("provide_students_visiting.html")
+    return render_template("provide_student_visiting.html")
 
 
 @app.route("/add_list", methods=["GET", "POST"])

@@ -11,6 +11,8 @@ class Students(DataBase):
     patronomic = sa.Column(sa.String)
     school_class = sa.Column(sa.String)
 
+    days = orm.relationship("Visitings")
+
 
 class XLSXFILES(DataBase):
     __tablename__ = 'xlsxfiles'
