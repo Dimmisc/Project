@@ -14,3 +14,5 @@ class Visitings(DataBase):
     lastExit = sa.Column(sa.String)
     attended = sa.Column(sa.Boolean)
     status = sa.Column(sa.String)
+
+
