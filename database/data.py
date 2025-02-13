@@ -7,6 +7,7 @@ from .db_session import DataBase
 class Visitings(DataBase):
     __tablename__ = 'visitings'
     id = sa.Column(sa.Integer, primary_key=True, autoincrement=True)
+    grade = sa.Column(sa.String)
     date = sa.Column(sa.String)
     surname = sa.Column(sa.String)
     name = sa.Column(sa.String)
@@ -16,4 +17,4 @@ class Visitings(DataBase):
     attended = sa.Column(sa.Boolean)
     status = sa.Column(sa.String)
 
-    student = orm.relationship("Students")
+    student = orm.relationship("Students", back_populates="visits")

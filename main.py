@@ -3,11 +3,11 @@ from flask import Flask, render_template, redirect, url_for
 from database import db_session 
 from werkzeug.utils import secure_filename
 
-from moduls.Site_moduls import main, adding
 from forms.using import LoginForm
 from forms.site import ExselFile
 from database.site_data import Students, XLSXFILES
 from database import db_session
+from moduls.Site_moduls import extand_xlsx_file
 
 
 DB_HREF = "database/db/blogs.db"
@@ -19,6 +19,9 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route("/", methods=["GET", "POST"]) 
 def main_page():
+    db_sess = db_session.create_session()
+    path = "static/loaded/Students.xlsx"
+    extand_xlsx_file(db_sess, path)
     return render_template("panel.html")
 
 
@@ -45,6 +48,7 @@ def excel_add():
         db_sess = db_session.create_session
         img_file = secure_filename(form.file.data.filename)
         path = os.path.join(app.config['UPLOAD_FOLDER'], img_file)
+        extand_xlsx_file(db_sess, path)
         form.file.data.save(path)
         file.file_href = path
         db_sess.add(file)

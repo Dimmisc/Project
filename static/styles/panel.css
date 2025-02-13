@@ -8,10 +8,9 @@ body {
 .grd {
     display: grid;
     grid-template-columns: 100% 0%;
-    grid-template-rows: auto;
 }
 .pt {
-    padding: 0%;
+    padding: 1%;
     margin-top: 5%;
     margin-left: 0%;
     margin-bottom: 0%;
@@ -26,14 +25,14 @@ body {
 .icon {
     width: 90%;
     height: 90%;
-    border: 0.3vh solid green;
+    border: 0.3vb solid green;
     border-radius: 20%;
 }
 .desc{
     margin: 0%;
     padding: 0%;
     visibility: hidden;
-    font-size: 2vb;
+    font-size: 20%;
 }
 .view {
     display: flex;
@@ -43,7 +42,18 @@ body {
     float: left;
     width: 4%;
     position: fixed;
+    background-color: rgb(201, 201, 201);
 
+}
+.content {
+    float: right;
+    width: 96%;
+    display: flex;
+}
+.border {
+    border-right: 0.5vw solid gray;
+    border-top: 0.5vw solid gray;
+    height: 200vw;
 }
 .panel:hover{
     width: 8%;
@@ -56,19 +66,19 @@ body {
     width: 91%;
 }
 .panel:hover .icon{
-    border: 0.3vh solid green;
+    border: 0.3vb solid green;
     border-radius: 20%;
 }
 .panel:hover .grd{
     display: grid;
     grid-template-columns: 50% 50%;
-    grid-auto-rows: minmax(0, auto);
+    grid-auto-rows: 100%;
 }
 .panel:hover .desc{
     margin: 0%;
     padding: 0%;
     visibility: visible;
-    font-size: 2vb;
+    font-size: 20%;
 }
 .panel:hover .pt{
     padding: 1%;
@@ -76,15 +86,4 @@ body {
     margin-left: 0%;
     margin-bottom: 0%;
     margin-right: 0%;
-}
-.content {
-    float: right;
-    width: 96%;
-    display: flex;
-
-}
-.border {
-    border-right: 0.5vh solid gray;
-    border-top: 0.5vh solid gray;
-    height: 200vh;
 }
