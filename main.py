@@ -19,16 +19,16 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route("/", methods=["GET", "POST"]) 
 def main_page():
-    return render_template("main.html")
+    return render_template("panel.html")
 
 
 @app.route("/provide_students_visiting")
-def prostuvis():
+def prostusvis():
     return render_template("provide_students_visiting.html")
 
 
 @app.route("/provide_grade_visiting")
-def prostuvis():
+def progravis():
     return render_template("provide_grade_visiting.html")
 
 
