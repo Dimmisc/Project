@@ -11,6 +11,7 @@ class Students(DataBase):
     patronomic = sa.Column(sa.String)
     grade = sa.Column(sa.String)
 
+    
     visits = orm.relationship("Visitings", back_populates="student")
 
 

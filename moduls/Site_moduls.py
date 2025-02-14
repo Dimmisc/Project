@@ -24,7 +24,8 @@ def extand_xlsx_file(db_sess, file_href) -> str:
     else: 
         return False
     for i in dataup:
-        student = students.filter_by(name=i[3], surname=i[2], patronomic=i[4]).one()
+        print(i[3], i[2], i[4], i[8])
+        student = db_sess.query(Students).filter_by(name=i[3], surname=i[2], patronomic=i[4]).first()
         visit = Visitings(date=i[0],
                               grade=i[1],
                               surname=i[2],
@@ -38,7 +39,7 @@ def extand_xlsx_file(db_sess, file_href) -> str:
         if student:
             visit.student = student
             db_sess.add(visit)
-        elif i[8] == "Обучающийся":
+        elif i[8] == "обучающиеся":
             new_student = Students(grade=i[1],
                                    surname=i[2],
                                    name=i[3],
@@ -47,4 +48,9 @@ def extand_xlsx_file(db_sess, file_href) -> str:
             db_sess.add(new_student)
             visit.student = new_student
             db_sess.add(visit)
+    Tr = db_sess.commit()
+    if Tr:
+        print(Tr)
+    else:
+        print(Tr)
     return str(dt.today()).split()[0]

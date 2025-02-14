@@ -17,4 +17,5 @@ class Visitings(DataBase):
     attended = sa.Column(sa.Boolean)
     status = sa.Column(sa.String)
 
+    user_id = sa.Column(sa.Integer, sa.ForeignKey("students.id"))
     student = orm.relationship("Students", back_populates="visits")

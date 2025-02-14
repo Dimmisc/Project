@@ -1,4 +1,4 @@
-import plotly.graph_objects as pgo
+import plotly.graph_objects as go
 
 def generate_visits_chart():
     """Generates a Plotly chart of student visits."""

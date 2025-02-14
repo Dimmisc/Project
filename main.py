@@ -21,7 +21,6 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 def main_page():
     db_sess = db_session.create_session()
     path = "static/loaded/Students.xlsx"
-    extand_xlsx_file(db_sess, path)
     return render_template("panel.html")
 
 
