@@ -22,8 +22,8 @@ def main_page():
     db_sess = db_session.create_session()
     # extand_xlsx_file(db_sess, "static/loaded/Students.xlsx")
     print(GetDataStudents(db_sess))
-    # plot = StudentsPlot(db_sess)
-    return render_template("panel.html")
+    plot = StudentsPlot(db_sess)
+    return render_template("panel.html", plot=plot)
 
 
 @app.route("/provide_students_visiting", methods=["GET", "POST"])

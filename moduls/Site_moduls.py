@@ -113,5 +113,22 @@ def GetDataStudents(db_sess) -> list:
     return data
 
 
-def GetGradesData(db_sess):
-    return
+def GetGradesData(db_sess) -> list:
+    grades = db_sess.query(Grades).all()
+    data = [[], []]
+    if grades:
+        for grade in grades:
+            maxvisit = 0
+            visitings = 0
+            for student in grade.students:
+                for visit in student.Visits:
+                    if visit.attended == True:
+                        visitings += 1
+                    maxvisit += 1
+            data[0].append(grade.grade)
+            data[1].append(visitings)
+    else:
+        return False
+    data.append(maxvisit)
+    """ Function returned data for graphic and max avalible visitng of students in one grade at the end """
+    return data
