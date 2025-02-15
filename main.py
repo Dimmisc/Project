@@ -20,8 +20,10 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 @app.route("/", methods=["GET", "POST"]) 
 def main_page():
     db_sess = db_session.create_session()
-    plot = StudentsPlot(db_sess)
-    return render_template("main.html", plot=plot)
+    # extand_xlsx_file(db_sess, "static/loaded/Students.xlsx")
+    print(GetDataStudents(db_sess))
+    # plot = StudentsPlot(db_sess)
+    return render_template("panel.html")
 
 
 @app.route("/provide_students_visiting", methods=["GET", "POST"])

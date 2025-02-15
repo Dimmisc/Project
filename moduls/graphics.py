@@ -6,13 +6,13 @@ def StudentsPlot(db_sess):
     datag = GetDataStudents(db_sess)
     const_max = max(datag[0])
     lengr = len(datag[0])
-    arg = 13
+    arg = 30
     fig = go.Figure()
     for step in range(lengr - arg):
         if step == 0:
             fig.add_trace(go.Bar(visible=False,y=datag[1] ))
         else:
-            fig.add_trace(go.Bar(visible=False,x=datag[0][step-1:step+arg-1] + ["vosid"],y=datag[1][step-1:step+arg-1] + [const_max]))
+            fig.add_trace(go.Bar(visible=False,x=datag[0][step-1:step+arg-1] + ["-_-"],y=datag[1][step-1:step+arg-1] + [const_max]))
     fig.data[0].visible = True
     go.Bar()
     steps = []
@@ -24,3 +24,6 @@ def StudentsPlot(db_sess):
     fig.update_layout(sliders=sliders)
     return fig.to_html(full_html=False, config={'displayModeBar': False})
 
+
+def GradesPlot():
+    return 
