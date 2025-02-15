@@ -19,23 +19,21 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route("/", methods=["GET", "POST"]) 
 def main_page():
-    db_sess = db_session.create_session()
-    path = "static/loaded/Students.xlsx"
     return render_template("panel.html")
 
 
-@app.route("/provide_students_visiting")
+`@app.route("/provide_students_visiting", methods=["GET", "POST"])
 def prostusvis():
-    return render_template("provide_students_visiting.html")
+    return render_template("provide_students_visiting.html")`
 
 
-@app.route("/provide_grade_visiting")
+@app.route("/provide_grade_visiting", methods=["GET", "POST"])
 def progravis():
     return render_template("provide_grade_visiting.html")
 
 
-@app.route("/provide_student_visiting", methods=["GET", "POST"])
-def prostuvis():
+@app.route("/provide_student_visiting/<int:id_student>", methods=["GET", "POST"])
+def prostuvis(id_student):
     return render_template("provide_student_visiting.html")
 
 
@@ -52,7 +50,8 @@ def excel_add():
         file.file_href = path
         db_sess.add(file)
         db_sess.commit()
-    return render_template("add_visiting.html", form=form)
+        return redirect('/')
+    return render_template("add_visiting.html", form=form, title="Добавление новой таблицы")
 
 
 if __name__ == "__main__":  
