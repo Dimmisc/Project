@@ -22,7 +22,7 @@ def main_page():
     return render_template("panel.html")
 
 
-`@app.route("/provide_students_visiting", methods=["GET", "POST"])
+@app.route("/provide_students_visiting", methods=["GET", "POST"])
 def prostusvis():
     return render_template("provide_students_visiting.html")`
 
