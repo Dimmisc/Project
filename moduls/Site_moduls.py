@@ -98,11 +98,10 @@ def extand_xlsx_file(db_sess, file_href) -> str:
 
 def GetDataStudents(db_sess) -> list:
     data = [[], []]
-    db_sess = db_session.create_session()
     students = db_sess.query(Students).all()
 
     for student in students:
-        student_abbreviation = f'<a href="/provide_student_visiting/{student.id}">' + str(student.surname)[0].upper() + ". " + str(student.name)[0].upper() + ". " + str(student.patronymic)[0].upper() + '</a>'
+        student_abbreviation = f'<a href="/provide_student_visiting/{student.id}">{str(student.surname)[0].upper()}. {str(student.name)[0].upper()}. {str(student.patronymic)[0].upper()}</a>'
         student_visit = 0
         for visit in student.Visits:
             if visit.attended == True:
@@ -118,6 +117,7 @@ def GetGradesData(db_sess) -> list:
     data = [[], []]
     if grades:
         for grade in grades:
+            grade_label = f"<a href='{grade.id}'>{grade.grade}</a>"
             maxvisit = 0
             visitings = 0
             for student in grade.students:
@@ -125,7 +125,7 @@ def GetGradesData(db_sess) -> list:
                     if visit.attended == True:
                         visitings += 1
                     maxvisit += 1
-            data[0].append(grade.grade)
+            data[0].append(grade_label)
             data[1].append(visitings)
     else:
         return False
