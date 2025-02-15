@@ -3,11 +3,11 @@ from flask import Flask, render_template, redirect, url_for
 from database import db_session 
 from werkzeug.utils import secure_filename
 
-from forms.using import LoginForm
 from forms.site import ExselFile
 from database.site_data import Students, XLSXFILES
 from database import db_session
-from moduls.Site_moduls import extand_xlsx_file
+from moduls.Site_moduls import extand_xlsx_file, GetDataStudents
+from moduls.graphics import StudentsPlot
 
 
 DB_HREF = "database/db/blogs.db"
@@ -19,12 +19,14 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route("/", methods=["GET", "POST"]) 
 def main_page():
-    return render_template("panel.html")
+    db_sess = db_session.create_session()
+    plot = StudentsPlot(db_sess)
+    return render_template("main.html", plot=plot)
 
 
 @app.route("/provide_students_visiting", methods=["GET", "POST"])
 def prostusvis():
-    return render_template("provide_students_visiting.html")`
+    return render_template("provide_students_visiting.html")
 
 
 @app.route("/provide_grade_visiting", methods=["GET", "POST"])

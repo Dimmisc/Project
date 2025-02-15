@@ -7,8 +7,10 @@ from database import db_session
 
 def extand_xlsx_file(db_sess, file_href) -> str:
     print(f"Site start add data from file: {file_href}")
+
     wookbook = load_workbook(file_href)
     worksheet, dataup = wookbook.active, []
+
     for row in worksheet.iter_rows(2, worksheet.max_row):
         c = []
         for i in range(0, worksheet.max_column):
@@ -17,8 +19,12 @@ def extand_xlsx_file(db_sess, file_href) -> str:
             else:
                 c.append(str(row[i].value))
         dataup.append(c)
+
     if db_sess == None:
         return False
+    else:
+        print(db_sess)
+    
     for i in dataup:
         print(i[3], i[2], i[4], i[8])
         student = db_sess.query(Students).filter_by(name=i[3], surname=i[2], patronomic=i[4], grade=i[1]).first()
@@ -32,6 +38,7 @@ def extand_xlsx_file(db_sess, file_href) -> str:
                           attended=True if i[7] == 'да' else False,
                           status=i[8]
                           )
+        
         if student:
             visit.student = student
             db_sess.add(visit)
@@ -45,14 +52,24 @@ def extand_xlsx_file(db_sess, file_href) -> str:
             visit.student = new_student
             db_sess.add(visit)
     db_sess.commit()
+
     print(f"Site ended add data from file: {file_href}")
+
     return str(dt.today()).split()[0]
 
 
 def GetDataStudents(db_sess) -> list:
-    data = []
+    data = [[], []]
     db_sess = db_session.create_session()
     students = db_sess.query(Students).all()
+
     for student in students:
+        student_abbreviation = f'<a href="/provide_student_visiting/{student.id}">' + str(student.surname)[0] + ". " + str(student.name)[0] + ". " + str(student.patronomic)[0] + '</a>'
+        student_visit = 0
         for visit in student.visits:
+            if visit.attended == True:
+                student_visit += 1
+        data[0].append(student_abbreviation)
+        data[1].append(student_visit)
+
     return data
