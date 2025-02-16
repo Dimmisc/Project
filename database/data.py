@@ -16,6 +16,7 @@ class Visitings(DataBase):
     lastExit = sa.Column(sa.String)
     attended = sa.Column(sa.Boolean)
     status = sa.Column(sa.String)
+    weekDay = sa.Column(sa.String)
 
     student_id = sa.Column(sa.Integer, sa.ForeignKey("students.id"))
     student = orm.relationship("Students", back_populates="Visits")

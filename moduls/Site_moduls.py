@@ -3,7 +3,8 @@ from datetime import datetime as dt
 
 from database.site_data import Students, Grades
 from database.data import Visitings
-from database import db_session
+from sqlalchemy.orm import Session
+
 
 def extand_xlsx_file(db_sess, file_href) -> str:
     print(f"Site start add data from file: {file_href}")
@@ -37,8 +38,12 @@ def extand_xlsx_file(db_sess, file_href) -> str:
                                                         surname=column[2], 
                                                         name=column[3], 
                                                         patronymic=column[4]).first()
-            print(column[1])
+
+            visitday = str(column[0]).split('-')
+            visitday = dt(int(visitday[0]), int(visitday[1]), int(visitday[2]))
+
             new_visit = Visitings(date=column[0],
+                                  weekDay=visitday.weekday(),
                                   grade=column[1],
                                   surname=column[2],
                                   name=column[3],
@@ -48,7 +53,9 @@ def extand_xlsx_file(db_sess, file_href) -> str:
                                   attended=True if column[7] == 'да' else False,
                                   status=column[8]
                                   )
+            
             print(new_visit.grade)
+
             if student:
                 new_visit.student = student
                 db_sess.add(new_visit)
@@ -73,8 +80,14 @@ def extand_xlsx_file(db_sess, file_href) -> str:
                                    patronymic=column[4],
                                    status=column[8],
                                    )
+            
             print("fstart to visit")
+
+            visitday = str(column[0]).split('-')
+            visitday = dt(int(visitday[0]), int(visitday[1]), int(visitday[2]))
+
             new_visit = Visitings(date=column[0],
+                                  weekDay=visitday.weekday(),
                                   grade=column[1],
                                   surname=column[2],
                                   name=column[3],
@@ -139,3 +152,11 @@ def CheckDateVisitings(href_to_file) -> str:
     xlsx_file = xlsx_file.active
     date = xlsx_file.iter_rows(1, 2)[1]
     return date
+
+
+def GetDataStudent(db_sess, id_student) -> list:
+    data = []
+    student = db_sess.qeury(Students).filter_by(id=id_student).first()
+    min_day = min([visit.date for visit in student.Visitings])
+    max_day = max([visit.date for visit in student.Visitings])
+    return data
