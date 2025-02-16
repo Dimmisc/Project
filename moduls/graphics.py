@@ -20,7 +20,7 @@ def StudentsPlot(db_sess):
     steps = []
     for i in range(len(fig.data)):
         step = dict(method="update",args=[{"visible": [False] * len(fig.data)}],)
-        step["args"][0]["visible"][i] = True  # Toggle i'th trace to "visible"
+        step["args"][0]["visible"][i] = True  # Toggle this trace to "visible"
         steps.append(step)
     sliders = [dict(active=0,pad={"t": 11},steps=steps)]
     fig.update_layout(sliders=sliders)
@@ -31,7 +31,8 @@ def GradesPlot(db_sess):
     data_grades = GetGradesData(db_sess)
     if data_grades == False:
         return "<h1>There isn't any data to do graphic</h1>"
-    const_max = data_grades[3]
+    print(data_grades)
+    const_max = data_grades[2]
     lengr = len(data_grades[0])
     arg = 30
     fig = go.Figure()
@@ -44,12 +45,15 @@ def GradesPlot(db_sess):
         fig.add_trace(go.Bar(visible=True, x=data_grades[0], y=data_grades[1] ))
         return fig.to_html(full_html=False, config={'displayModeBar': False})
     fig.data[0].visible = True
-    go.Bar()
     steps = []
     for i in range(len(fig.data)):
         step = dict(method="update",args=[{"visible": [False] * len(fig.data)}],)
-        step["args"][0]["visible"][i] = True  # Toggle i'th trace to "visible"
+        step["args"][0]["visible"][i] = True  # Toggle this trace to "visible"
         steps.append(step)
     sliders = [dict(active=0,pad={"t": 11},steps=steps)]
     fig.update_layout(sliders=sliders)
     return fig.to_html(full_html=False, config={'displayModeBar': False})
+
+
+def StudentsGradePlot():
+    return 

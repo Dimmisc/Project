@@ -24,25 +24,25 @@ def main_page():
     print(GetDataStudents(db_sess))
     print()
     print(GetGradesData(db_sess))
+
     return render_template("panel.html")
 
 
 @app.route("/provide_students_visiting", methods=["GET", "POST"])
-def prostusvis():
+def prostusvissearch():
     plot = StudentsPlot(db_session.create_session())
     return render_template("provide_students_visiting.html", plot=plot)
 
 
-@app.route("/provide_grade_visiting", methods=["GET", "POST"])
+@app.route("/provide_grade_visitings", methods=["GET", "POST"])
 def progravis():
     plot = GradesPlot(db_session.create_session())
     return render_template("provide_grade_visiting.html", plot=plot)
 
 
-@app.reute("/grade_description/<int:id_grade>")
+@app.route("/grade_description/<int:id_grade>")
 def grades(id_grade):
     return render_template("grade_description.html")
-
 
 
 @app.route("/provide_student_visiting/<int:id_student>", methods=["GET", "POST"])

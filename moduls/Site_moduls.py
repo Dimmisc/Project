@@ -7,12 +7,12 @@ from database import db_session
 
 def extand_xlsx_file(db_sess, file_href) -> str:
     print(f"Site start add data from file: {file_href}")
-
     wookbook = load_workbook(file_href)
+
     worksheet, ExcelData = wookbook.active, []
 
-    """ Next algoritm changed format from xlsx worbook to python list in columns """
-    # elements of column:(1-date; 2-grade; 3-surname; 4-name; 5-patronymic; 6-first enter; 7-last exit; 8-attnding studeent; 9-status)
+    """ Next algoritm changed format from xlsx worbook to python list in rows """
+    # elements of row:(1-date; 2-grade; 3-surname; 4-name; 5-patronymic; 6-first enter; 7-last exit; 8-attnding studeent; 9-status)
 
     for row in worksheet.iter_rows(2, worksheet.max_row):
         c = []
@@ -132,3 +132,10 @@ def GetGradesData(db_sess) -> list:
     data.append(maxvisit)
     """ Function returned data for graphic and max avalible visitng of students in one grade at the end """
     return data
+
+
+def CheckDateVisitings(href_to_file) -> str:
+    xlsx_file = load_workbook(href_to_file)
+    xlsx_file = xlsx_file.active
+    date = xlsx_file.iter_rows(1, 2)[1]
+    return date
