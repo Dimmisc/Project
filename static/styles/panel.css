@@ -27,8 +27,8 @@ body {
     display: inline;
 }
 .icon {
-    width: 6.9vb;
-    border: 0.3vb solid green;
+    width: 90%;
+    border: 0.2vw solid green;
     border-radius: 20%;
 }
 .desc{
@@ -69,13 +69,15 @@ body {
     width: 91%;
 }
 .panel:hover .icon{
-    border: 0.3vb solid green;
+    width: 90%;
+    border: 0.2vw solid green;
     border-radius: 20%;
 }
 .panel:hover .grd{
     display: grid;
     grid-template-columns: 50% 50%;
     grid-auto-rows: 100%;
+    margin-right: 6%;
 }
 .panel:hover .desc{
     margin: 0%;
@@ -94,4 +96,8 @@ body {
     width: 1200px;
     padding-left: 10%;
     padding-top: 0%;
+}
+.WeekDays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
 }

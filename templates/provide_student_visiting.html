@@ -1,5 +1,30 @@
 {% extends "panel.html" %}
 
 {% block content %}
+<div>
+    <div>
 
+    </div>
+    <div class="WeekDays">
+        {% for day in visits[0] %}
+        <div>
+            {{ day }}
+        </div>
+        {% endfor %}
+        {% for day in visits[1] %}
+            <div>
+                <div>
+                    {% if day[1] == True %}
+                        Присутствовал
+                    {% else %}
+                        Не Присутствовал
+                    {% endif %}
+                </div>
+                <div>
+                    {{ day[0] }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

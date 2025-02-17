@@ -8,6 +8,7 @@ from database.site_data import Students, XLSXFILES
 from database import db_session
 from moduls.Site_moduls import extand_xlsx_file, GetDataStudents, GetGradesData, GetDataStudent
 from moduls.graphics import StudentsPlot, GradesPlot
+from forms.using import SearchForm
 
 
 DB_HREF = "database/db/blogs.db"
@@ -15,24 +16,26 @@ UPLOAD_FOLDER = "static/loaded"
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['SECRET_KEY'] = 'mysecurytiname'
 
 
 @app.route("/", methods=["GET", "POST"]) 
 def main_page():
     db_sess = db_session.create_session()
-    # extand_xlsx_file(db_sess, "static/loaded/Students.xlsx")
+    extand_xlsx_file(db_sess, "static/loaded/Generated_by_XLSXFILLER.xlsx")
     # print(GetDataStudents(db_sess))
-    print()
+    # print()
     # print(GetGradesData(db_sess))
-    print()
-    print(GetDataStudent(db_sess, 5))
+    # print()
+    # print(GetDataStudent(db_sess, 5))
     return render_template("panel.html")
 
 
 @app.route("/provide_students_visiting", methods=["GET", "POST"])
 def prostusvissearch():
+    form = SearchForm()
     plot = StudentsPlot(db_session.create_session())
-    return render_template("provide_students_visiting.html", plot=plot)
+    return render_template("provide_students_visiting.html", plot=plot, form=form)
 
 
 @app.route("/provide_grade_visitings", methods=["GET", "POST"])
@@ -48,7 +51,10 @@ def grades(id_grade):
 
 @app.route("/provide_student_visiting/<int:id_student>", methods=["GET", "POST"])
 def prostuvis(id_student):
-    return render_template("provide_student_visiting.html")
+    db_sess = db_session.create_session()
+    visits = GetDataStudent(db_sess, id_student)
+    print(visits)
+    return render_template("provide_student_visiting.html", visits=visits)
 
 
 @app.route("/add_list", methods=["GET", "POST"])
@@ -65,7 +71,7 @@ def excel_add():
         db_sess.add(file)
         db_sess.commit()
         return redirect('/')
-    return render_template("add_visiting.html", form=form, title="Добавление новой таблицы")
+    return render_template("add_visitings.html", form=form, title="Добавление новой таблицы")
 
 
 if __name__ == "__main__":  

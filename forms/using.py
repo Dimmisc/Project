@@ -4,5 +4,5 @@ from wtforms.validators import DataRequired
 
 
 class SearchForm(FlaskForm):
-    select = SelectField("Найти ученика")
-    Submit = SubmitField("Перейти")
+    select = SelectField("Найти ученика:")
+    submit = SubmitField("Перейти")

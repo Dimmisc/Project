@@ -1,5 +1,15 @@
 {% extends "panel.html" %}
 
 {% block content %}
+<div>
+    <div>
+        <div>
+            {{ form.select.label() }} {{ form.select() }}
+        </div>
+        <div>
+            {{ form.submit() }}
+        </div>
+    </div>
     {{ plot | safe }}
+</div>
 {% endblock %}
