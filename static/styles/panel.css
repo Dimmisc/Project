@@ -2,6 +2,10 @@ body {
     padding: 0%;
     margin: 0%;
 }
+.nullatr {
+    padding: 0%;
+    margin: 0%;
+}
 .flx {
     display: flex;
 }
@@ -10,11 +14,11 @@ body {
     grid-template-columns: 100% 0%;
 }
 .pt {
-    padding: 1%;
-    margin-top: 5%;
-    margin-left: 0%;
-    margin-bottom: 0%;
-    margin-right: 0%;
+    padding: 0vb;
+    margin-top: 0vb;
+    margin-left: 0vb;
+    margin-bottom: 0vb;
+    margin-right: 0vb;
 }
 .lf {
     float: left;    
@@ -23,8 +27,7 @@ body {
     display: inline;
 }
 .icon {
-    width: 90%;
-    height: 90%;
+    width: 6.9vb;
     border: 0.3vb solid green;
     border-radius: 20%;
 }
@@ -32,7 +35,7 @@ body {
     margin: 0%;
     padding: 0%;
     visibility: hidden;
-    font-size: 0.1vw;
+    font-size: 1vw;
 }
 .view {
     display: flex;
@@ -78,14 +81,14 @@ body {
     margin: 0%;
     padding: 0%;
     visibility: visible;
-    font-size: 0.1vw;
+    font-size: 1vw;
 }
 .panel:hover .pt{
-    padding: 1%;
-    margin-top: 2.5%;
-    margin-left: 0%;
-    margin-bottom: 0%;
-    margin-right: 0%;
+    padding: 0.2vb;
+    margin-top: 0vb;
+    margin-left: 0vb;
+    margin-bottom: 0vb;
+    margin-right: 0vb;
 }
 .need {
     width: 1200px;

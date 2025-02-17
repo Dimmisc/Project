@@ -1,5 +1,6 @@
 from openpyxl import load_workbook
 from datetime import datetime as dt
+from datetime import timedelta
 
 from database.site_data import Students, Grades
 from database.data import Visitings
@@ -156,7 +157,18 @@ def CheckDateVisitings(href_to_file) -> str:
 
 def GetDataStudent(db_sess, id_student) -> list:
     data = []
-    student = db_sess.qeury(Students).filter_by(id=id_student).first()
-    min_day = min([visit.date for visit in student.Visitings])
-    max_day = max([visit.date for visit in student.Visitings])
+    student = db_sess.query(Students).filter_by(id=id_student).first()
+    visitings = student.Visits
+    min_day = min([(visit.date, visit.weekDay) for visit in visitings], key=lambda x: x[0])
+    max_day = max([(visit.date, visit.weekDay) for visit in visitings], key=lambda x: x[0])
+    print(min_day, max_day)
+    miday = min_day[0].split('-')
+    maday = max_day[0].split('-')
+    min_day = [dt(int(miday[0]), int(miday[1]), int(miday[2])), min_day[0]]
+    max_day = [dt(int(maday[0]), int(maday[1]), int(maday[2])), max_day[0]]
+    min_day[0] -= min_day[1]
+    max_day[0] += 7 - max_day[1]
+    print()
+    for i in range((max_day[0] - min_day[0]).days + 1):
+        print(i)
     return data
