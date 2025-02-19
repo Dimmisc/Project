@@ -76,7 +76,6 @@ body {
 .panel:hover .grd{
     display: grid;
     grid-template-columns: 50% 50%;
-    grid-auto-rows: 100%;
     margin-right: 6%;
 }
 .panel:hover .desc{
@@ -97,7 +96,41 @@ body {
     padding-left: 10%;
     padding-top: 0%;
 }
+
+
+/* Theese css styles will be separated to other css tables */
+
+
 .WeekDays {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
+}
+
+
+.Weekday {
+    padding: 2%;
+    align-self: center;
+    text-align: center;
+}
+.weekDay {
+    background-color: burlywood;
+}
+.HumanDay {
+    align-self: center;
+    text-align: center;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-bottom: 1%;
+}
+.Humanday {
+    border: 0.1vb solid black ;
+}
+.Green {
+    background-color: rgba(125, 233, 125, 0.8);
+}
+.Red {
+    background-color: rgba(240, 128, 128, 0.8);
+}
+.AlertRed {
+    background-color: rgb(255, 17, 0);
 }

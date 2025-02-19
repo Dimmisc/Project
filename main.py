@@ -7,7 +7,7 @@ from forms.site import ExselFile
 from database.site_data import Students, XLSXFILES
 from database import db_session
 from moduls.Site_moduls import extand_xlsx_file, GetDataStudents, GetGradesData, GetDataStudent
-from moduls.graphics import StudentsPlot, GradesPlot
+from moduls.graphics import StudentsPlot, GradesPlot, GradeStudentsPlot
 from forms.using import SearchForm
 
 
@@ -22,7 +22,7 @@ app.config['SECRET_KEY'] = 'mysecurytiname'
 @app.route("/", methods=["GET", "POST"]) 
 def main_page():
     db_sess = db_session.create_session()
-    extand_xlsx_file(db_sess, "static/loaded/Generated_by_XLSXFILLER.xlsx")
+    # extand_xlsx_file(db_sess, "static/loaded/Generated_by_XLSXFILLER.xlsx")
     # print(GetDataStudents(db_sess))
     # print()
     # print(GetGradesData(db_sess))
@@ -35,10 +35,12 @@ def main_page():
 def prostusvissearch():
     form = SearchForm()
     plot = StudentsPlot(db_session.create_session())
+    if form.validate_on_submit():
+        return redirect(f"/provide_student_visiting/{ form.select.data }")
     return render_template("provide_students_visiting.html", plot=plot, form=form)
 
 
-@app.route("/provide_grade_visitings", methods=["GET", "POST"])
+@app.route("/provide_grades_visitings", methods=["GET", "POST"])
 def progravis():
     plot = GradesPlot(db_session.create_session())
     return render_template("provide_grade_visiting.html", plot=plot)
@@ -46,7 +48,9 @@ def progravis():
 
 @app.route("/grade_description/<int:id_grade>")
 def grades(id_grade):
-    return render_template("grade_description.html")
+    db_sess = db_session.create_session()
+    plot = GradeStudentsPlot(db_sess, id_grade)
+    return render_template("grade_description.html", plot=plot)
 
 
 @app.route("/provide_student_visiting/<int:id_student>", methods=["GET", "POST"])
@@ -64,7 +68,7 @@ def excel_add():
         file = XLSXFILES()
         db_sess = db_session.create_session
         img_file = secure_filename(form.file.data.filename)
-        path = os.path.join(app.config['UPLOAD_FOL  DER'], img_file)
+        path = os.path.join(app.config['UPLOAD_FOLDER'], img_file)
         extand_xlsx_file(db_sess, path)
         form.file.data.save(path)
         file.file_href = path
@@ -73,7 +77,7 @@ def excel_add():
         return redirect('/')
     return render_template("add_visitings.html", form=form, title="Добавление новой таблицы")
 
-
+    
 if __name__ == "__main__":  
     db_session.global_init(DB_HREF)
     app.run(debug=True)

@@ -1,5 +1,5 @@
 import plotly.graph_objects as go
-from .Site_moduls import GetDataStudents, GetGradesData
+from .Site_moduls import GetDataStudents, GetGradesData, GetGradeStudentsData
 
 
 def StudentsPlot(db_sess):
@@ -26,23 +26,22 @@ def StudentsPlot(db_sess):
     fig.update_layout(sliders=sliders)
     return fig.to_html(full_html=False, config={'displayModeBar': False})
 
-
 def GradesPlot(db_sess):
-    data_grades = GetGradesData(db_sess)
-    if data_grades == False:
+    data = GetGradesData(db_sess)
+    if data == False:
         return "<h1>There isn't any data to do graphic</h1>"
-    print(data_grades)
-    const_max = data_grades[2]
-    lengr = len(data_grades[0])
+    print(data)
+    const_max = data[2]
+    lengr = len(data[0])
     arg = 30
     fig = go.Figure()
     for step in range(lengr - arg):
         if step == 0:
-            fig.add_trace(go.Bar(visible=False, y=data_grades[1] ))
+            fig.add_trace(go.Bar(visible=False, y=data[1] ))
         else:
-            fig.add_trace(go.Bar(visible=False, x=data_grades[0][step - 1:step + arg - 1] + ["-_-"], y=data_grades[1][step - 1:step + arg - 1] + [const_max]))
+            fig.add_trace(go.Bar(visible=False, x=data[0][step - 1:step + arg - 1] + ["-_-"], y=data[1][step - 1:step + arg - 1] + [const_max]))
     if arg > lengr:
-        fig.add_trace(go.Bar(visible=True, x=data_grades[0], y=data_grades[1] ))
+        fig.add_trace(go.Bar(visible=True, x=data[0], y=data[1] ))
         return fig.to_html(full_html=False, config={'displayModeBar': False})
     fig.data[0].visible = True
     steps = []
@@ -50,10 +49,17 @@ def GradesPlot(db_sess):
         step = dict(method="update",args=[{"visible": [False] * len(fig.data)}],)
         step["args"][0]["visible"][i] = True  # Toggle this trace to "visible"
         steps.append(step)
-    sliders = [dict(active=0,pad={"t": 11},steps=steps)]
+    sliders = [dict(active=0, pad={"t": 11}, steps=steps)]
     fig.update_layout(sliders=sliders)
     return fig.to_html(full_html=False, config={'displayModeBar': False})
 
 
-def StudentsGradePlot():
-    return 
+def GradeStudentsPlot(db_sess, id_grade):
+    data = GetGradeStudentsData(db_sess, id_grade)
+    if data == False:
+        return "<h1>There isn't any data to do graphic</h1>"
+    print(data)
+    const_max = data[2]
+    fig = go.Figure()
+    fig.add_trace(go.Bar(visible=True, x=data[0] + ["Max"], y=data[1] + [const_max]))
+    return fig.to_html(full_html=False, config={'displayModeBar': False})

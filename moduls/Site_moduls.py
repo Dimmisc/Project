@@ -116,7 +116,6 @@ def GetDataStudents(db_sess) -> list:
         student_visit = 0
         for visit in student.Visits:
             if visit.attended == True:
-                print(visit.attended)
                 student_visit += 1
         data[0].append(student_abbreviation)
         data[1].append(student_visit)
@@ -129,7 +128,7 @@ def GetGradesData(db_sess) -> list:
     data = [[], []]
     if grades:
         for grade in grades:
-            grade_label = f"<a href='{grade.id}'>{grade.grade}</a>"
+            grade_label = f"<a href='/grade_description/{grade.id}'>{grade.grade}</a>"
             maxvisit = 0
             visitings = 0
             for student in grade.students:
@@ -184,4 +183,27 @@ def GetDataStudent(db_sess, id_student) -> list:
             data[1].append([visit[0].firstEnter, visit[0].attended])
         else:
             data[1].append(['None data', False])
+    return data
+
+
+def GetGradeStudentsData(db_sess, id_grade) -> list:
+    data = [[], [], 0]
+    student = None
+    grade = db_sess.query(Grades).filter_by(id=id_grade).first()
+    if grade:
+        for student in grade.students:
+            student_abreviation = f'<a href="/provide_student_visiting/{student.id}">{str(student.surname)[0].upper()}. {str(student.name)[0].upper()}. {str(student.patronymic)[0].upper()}</a>'
+            student_visits = 0
+            for visit in student.Visits:
+                if visit.attended == True:
+                    student_visits += 1
+            data[0].append(student_abreviation)
+            data[1].append(student_visits)
+    max_visit = len(student.Visits)
+    data[2] = max_visit
+    return data
+
+def GetStudentsLatesData(db_sess) -> list:
+    data = []
+    
     return data

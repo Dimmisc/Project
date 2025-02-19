@@ -7,21 +7,38 @@
     </div>
     <div class="WeekDays">
         {% for day in visits[0] %}
-        <div>
-            {{ day }}
-        </div>
+            <div class="Weekday">
+                <div class="weekDay">
+                    {{ day }}
+                </div>
+            </div>
         {% endfor %}
         {% for day in visits[1] %}
-            <div>
-                <div>
+            <div class="HumanDay">
+                <div class="Humanday">
                     {% if day[1] == True %}
-                        Присутствовал
+                        <div class="Green">
+                            <div>
+                                Был
+                            </div>
+                            <div>
+                                Время входа: {{ day[0] }}
+                            </div>
+                        </div>
+                    {% elif day[0] == "None data" %}
+                    <div class="AlertRed">
+                        Нет данных
+                    </div>
                     {% else %}
-                        Не Присутствовал
+                    <div class="Red">
+                        <div>
+                            Не Был  
+                        </div>
+                        <div>
+                            Время входа: {{ day[0] }}
+                        </div>
+                    </div>
                     {% endif %}
-                </div>
-                <div>
-                    {{ day[0] }}
                 </div>
             </div>
         {% endfor %}
