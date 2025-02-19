@@ -56,9 +56,13 @@ def grades(id_grade):
 @app.route("/provide_student_visiting/<int:id_student>", methods=["GET", "POST"])
 def prostuvis(id_student):
     db_sess = db_session.create_session()
+    student = db_sess.query(Students).filter_by(id=id_student).first()
     visits = GetDataStudent(db_sess, id_student)
+    Student = {}
+    Student["FIO"] = f'{student.surname} {student.name} {student.patronymic}'
+    Student["Class"] = student.Grade
     print(visits)
-    return render_template("provide_student_visiting.html", visits=visits)
+    return render_template("provide_student_visiting.html", visits=visits, student=Student)
 
 
 @app.route("/add_list", methods=["GET", "POST"])
@@ -77,7 +81,7 @@ def excel_add():
         return redirect('/')
     return render_template("add_visitings.html", form=form, title="Добавление новой таблицы")
 
-    
+
 if __name__ == "__main__":  
     db_session.global_init(DB_HREF)
     app.run(debug=True)

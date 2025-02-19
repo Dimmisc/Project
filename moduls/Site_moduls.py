@@ -112,7 +112,7 @@ def GetDataStudents(db_sess) -> list:
     students = db_sess.query(Students).all()
 
     for student in students:
-        student_abbreviation = f'<a href="/provide_student_visiting/{student.id}">{str(student.surname)[0].upper()}. {str(student.name)[0].upper()}. {str(student.patronymic)[0].upper()}</a>'
+        student_abbreviation = f'<a href="/provide_student_visiting/{student.id}" target="_self">{str(student.surname)[0].upper()}. {str(student.name)[0].upper()}. {str(student.patronymic)[0].upper()}</a>'
         student_visit = 0
         for visit in student.Visits:
             if visit.attended == True:
@@ -128,7 +128,7 @@ def GetGradesData(db_sess) -> list:
     data = [[], []]
     if grades:
         for grade in grades:
-            grade_label = f"<a href='/grade_description/{grade.id}'>{grade.grade}</a>"
+            grade_label = f"<a href='/grade_description/{grade.id}' target='_self'>{grade.grade}</a>"
             maxvisit = 0
             visitings = 0
             for student in grade.students:
@@ -172,6 +172,7 @@ def GetDataStudent(db_sess, id_student) -> list:
     min_day, max_day = min_day[0], max_day[0]
     one_day_delta = timedelta(days=1)
     data[0].extend(['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'])
+
     for i in range((max_day - min_day).days):
         min_day += one_day_delta
         str_TIME = str(min_day).split()[0]
@@ -192,7 +193,7 @@ def GetGradeStudentsData(db_sess, id_grade) -> list:
     grade = db_sess.query(Grades).filter_by(id=id_grade).first()
     if grade:
         for student in grade.students:
-            student_abreviation = f'<a href="/provide_student_visiting/{student.id}">{str(student.surname)[0].upper()}. {str(student.name)[0].upper()}. {str(student.patronymic)[0].upper()}</a>'
+            student_abreviation = f'<a href="/provide_student_visiting/{student.id}" target="_self">{str(student.surname)[0].upper()}. {str(student.name)[0].upper()}. {str(student.patronymic)[0].upper()}</a>'
             student_visits = 0
             for visit in student.Visits:
                 if visit.attended == True:
@@ -205,5 +206,5 @@ def GetGradeStudentsData(db_sess, id_grade) -> list:
 
 def GetStudentsLatesData(db_sess) -> list:
     data = []
-    
+
     return data

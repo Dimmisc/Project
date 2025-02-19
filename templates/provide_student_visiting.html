@@ -2,8 +2,11 @@
 
 {% block content %}
 <div>
-    <div>
-
+    <div class="Student">
+        <div>
+            <h1>{{ student.FIO }}</h1>
+            <h3>Класс: {{ student.Class }} </h3>
+        </div>
     </div>
     <div class="WeekDays">
         {% for day in visits[0] %}
