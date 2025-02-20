@@ -2,14 +2,17 @@
 
 {% block content %}
 <div>
-    <div>
-        <div>
+    <div class="flx1">
+        <div class="ri">
             {{ form.select.label() }} {{ form.select() }}
         </div>
-        <div>
+        <div class="le">
             {{ form.submit() }}
         </div>
+        <h1 class="cental pd">График всех учеников:</h1>    
     </div>
-    {{ plot | safe }}
+    <div class="plt1">
+        {{ plot | safe }}
+    </div>
 </div>
 {% endblock %}

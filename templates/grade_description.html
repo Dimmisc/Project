@@ -1,5 +1,10 @@
 {% extends "panel.html" %}
 
 {% block content %}
-    {{ plot | safe }}
+<div>
+    <h1 class="cental pd">График посещаемости учеников класса: {{ nameg }}</h1>    
+    <div class="plt1">
+        {{ plot | safe }}
+    </div>
+</div>
 {% endblock %}

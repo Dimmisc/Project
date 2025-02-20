@@ -142,3 +142,32 @@ body {
     height: 100%;
     width: 100%;
 }
+.ri {
+    width: 30%;
+    float: left;
+}
+.le {
+    width: 60%;
+    float: left;
+}
+.flx1 {
+    display: center;
+    padding: 3%;
+}
+.cental{
+    text-align: center;
+}
+.pd {
+    padding-top: 5%;
+}
+.pidpad {
+    padding-left: 2%;
+}
+.lnk {
+    text-decoration: none;
+    color: brown;
+}
+.lnk:hover {
+    text-decoration: none;
+    color:darkred;
+}

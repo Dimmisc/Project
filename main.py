@@ -4,7 +4,7 @@ from database import db_session
 from werkzeug.utils import secure_filename
 
 from forms.site import ExselFile
-from database.site_data import Students, XLSXFILES
+from database.site_data import Students, XLSXFILES, Grades
 from database import db_session
 from moduls.Site_moduls import extand_xlsx_file, GetDataStudents, GetGradesData, GetDataStudent
 from moduls.graphics import StudentsPlot, GradesPlot, GradeStudentsPlot
@@ -21,7 +21,7 @@ app.config['SECRET_KEY'] = 'mysecurytiname'
 
 @app.route("/", methods=["GET", "POST"]) 
 def main_page():
-    db_sess = db_session.create_session()
+    # db_sess = db_session.create_session()
     # extand_xlsx_file(db_sess, "static/loaded/Generated_by_XLSXFILLER.xlsx")
     # print(GetDataStudents(db_sess))
     # print()
@@ -50,7 +50,8 @@ def progravis():
 def grades(id_grade):
     db_sess = db_session.create_session()
     plot = GradeStudentsPlot(db_sess, id_grade)
-    return render_template("grade_description.html", plot=plot)
+    namegd = db_sess.query(Grades).filter_by(id=id_grade).first().grade
+    return render_template("grade_description.html", plot=plot, nameg=namegd)
 
 
 @app.route("/provide_student_visiting/<int:id_student>", methods=["GET", "POST"])
@@ -60,7 +61,7 @@ def prostuvis(id_student):
     visits = GetDataStudent(db_sess, id_student)
     Student = {}
     Student["FIO"] = f'{student.surname} {student.name} {student.patronymic}'
-    Student["Class"] = student.Grade
+    Student["Class"] = student.Grade.grade
     print(visits)
     return render_template("provide_student_visiting.html", visits=visits, student=Student)
 
