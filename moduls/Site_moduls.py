@@ -2,8 +2,7 @@ from openpyxl import load_workbook
 from datetime import datetime as dt
 from datetime import timedelta
 
-from database.site_data import Students, Grades
-from database.data import Visitings
+from database.data import Visitings, Students, Grades
 from sqlalchemy.orm import Session
 
 

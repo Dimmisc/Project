@@ -4,8 +4,7 @@ from database import db_session
 from werkzeug.utils import secure_filename
 
 from forms.site import ExselFile
-from database.site_data import Students, XLSXFILES, Grades
-from database import db_session
+from database.data import Students, XLSXFILES, Grades
 from moduls.Site_moduls import extand_xlsx_file, GetDataStudents, GetGradesData, GetDataStudent
 from moduls.graphics import StudentsPlot, GradesPlot, GradeStudentsPlot
 from forms.using import SearchForm
@@ -13,6 +12,7 @@ from forms.using import SearchForm
 
 DB_HREF = "database/db/blogs.db"
 UPLOAD_FOLDER = "static/loaded"
+
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER

@@ -14,7 +14,7 @@ def StudentsPlot(db_sess):
         if step == 0:
             fig.add_trace(go.Bar(visible = False, y = data_students[1] ))
         else : 
-            fig.add_trace(go.Bar(visible = False, x = data_students[0][step - 1:step + arg - 1] + ["-_-"], y=data_students[1][step - 1:step + arg - 1] + [const_max]))
+            fig.add_trace(go.Bar(visible = False, x = data_students[0][step - 1:step + arg - 1] + ["-_-"], y=data_students[1][step - 1:step + arg - 1] + [15]))
     fig.data[0].visible = True
     go.Bar()
     steps = []
@@ -39,7 +39,7 @@ def GradesPlot(db_sess):
         if step == 0:
             fig.add_trace(go.Bar(visible=False, y=data[1] ))
         else:
-            fig.add_trace(go.Bar(visible=False, x=data[0][step - 1:step + arg - 1] + ["-_-"], y=data[1][step - 1:step + arg - 1] + [const_max]))
+            fig.add_trace(go.Bar(visible=False, x=data[0][step - 1:step + arg - 1] + ["-_-"], y=data[1][step - 1:step + arg - 1] + [15]))
     if arg > lengr:
         fig.add_trace(go.Bar(visible=True, x=data[0], y=data[1] ))
         return fig.to_html(full_html=False, config={'displayModeBar': False})
@@ -61,5 +61,5 @@ def GradeStudentsPlot(db_sess, id_grade):
     print(data)
     const_max = data[2]
     fig = go.Figure()
-    fig.add_trace(go.Bar(visible=True, x=data[0] + ["Max"], y=data[1] + [const_max]))
+    fig.add_trace(go.Bar(visible=True, x=data[0] + ["Max"], y=data[1] + [15 ]))
     return fig.to_html(full_html=False, config={'displayModeBar': False})
